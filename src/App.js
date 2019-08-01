@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { incrementar, decrementar, setear } from './reducers';
 import logo from './logo.svg';
 import './App.css';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 class App extends Component{
 
@@ -21,7 +22,7 @@ class App extends Component{
 
   render() {
     const { incrementar, decrementar, valor } = this.props
-    console.log(this.state)
+
     return (
     <div className="App">
       <p>{valor}</p>
@@ -34,9 +35,10 @@ class App extends Component{
     
   }
 }
-    const mapStateToProps = state =>{
+    const mapStateToProps = state => {
+      
       return {
-        valor: state,
+        valor: state.contador,
       }
     }
      
@@ -44,7 +46,7 @@ class App extends Component{
     ({
       incrementar: () => dispatch( incrementar() ) , 
       decrementar: () => dispatch( decrementar() ) ,  
-      setear: payload => dispatch( setear(setear) ) ,
+      setear: payload => dispatch( setear(payload) ) ,
     })  
     
        
